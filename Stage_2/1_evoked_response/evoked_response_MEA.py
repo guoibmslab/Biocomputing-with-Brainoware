@@ -83,12 +83,14 @@ def prepare_stim_sequence(
             )
         if max_phase is None or phase_interval is None:
             raise ValueError(
-                "Both max_phase and phase_interval are required for changing_amplitude."
+                "Both max_phase and phase_interval are required for changing_phase."
             )
         for cur_amplitude in range(
-            amplitude, max_amplitude, amplitude_interval
+            amplitude, max_amplitude + amplitude_interval, amplitude_interval
         ):
-            for cur_phase in range(phase, max_phase, phase_interval):
+            for cur_phase in range(
+                phase, max_phase + phase_interval, phase_interval
+            ):
                 for _ in range(number_pulses_per_train):
                     seq = create_stim_pulse(
                         seq, int(cur_amplitude / dac_lsb_mV), cur_phase
@@ -101,7 +103,7 @@ def prepare_stim_sequence(
                 "Both max_amplitude and amplitude_interval are required for changing_amplitude."
             )
         for cur_amplitude in range(
-            amplitude, max_amplitude, amplitude_interval
+            amplitude, max_amplitude + amplitude_interval, amplitude_interval
         ):
             for _ in range(number_pulses_per_train):
                 seq = create_stim_pulse(
@@ -112,9 +114,11 @@ def prepare_stim_sequence(
     elif changing_phase:
         if max_phase is None or phase_interval is None:
             raise ValueError(
-                "Both max_phase and phase_interval are required for changing_amplitude."
+                "Both max_phase and phase_interval are required for changing_phase."
             )
-        for cur_phase in range(phase, max_phase, phase_interval):
+        for cur_phase in range(
+            phase, max_phase + phase_interval, phase_interval
+        ):
             for _ in range(number_pulses_per_train):
                 seq = create_stim_pulse(
                     seq, int(amplitude / dac_lsb_mV), cur_phase
