@@ -163,7 +163,7 @@ In this protocol, three environments are required to finish all steps:
         - Stage_3/4_Readout_layer_training_and_prediction.ipynb
 
 ## Citation
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22945183.svg)](https://doi.org/10.5281/zenodo.22945183)
+[![DOI](https://zenodo.org/badge/1386173057.svg)](https://doi.org/10.5281/zenodo.22946464)
 
 If you're using this repository in your research, please cite the repository and associated Nature Protocols article.
 
