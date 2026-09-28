@@ -30,7 +30,7 @@ import matplotlib.pyplot as plt
 ## ------------------------------------------------------------------ ##
 here = os.path.dirname(os.path.abspath(__file__))
 path = os.path.join(here, "..", "1_evoked_response")
-filename = "psth_exp"
+filename = "fig3a_psth_exp"
 
 spike_time = pd.read_csv(
     os.path.join(path, filename + "_spike.csv"),
@@ -58,7 +58,11 @@ durations = np.size(sti_dura)  # number of durations  (5)
 artifact = 0.002  # stim-artifact half-window to discard (s)
 
 dura_idx = durations - 1  # 500us (strongest / clearest response)
-amp_sel = [1, 2, 3]  # 200, 300, 400 mVpp (below threshold -> graded -> saturating)
+amp_sel = [
+    1,
+    2,
+    3,
+]  # 200, 300, 400 mVpp (below threshold -> graded -> saturating)
 
 # measurement windows relative to each stimulation pulse (label, start_s, end_s).
 # These amplitudes sit on the rising part of the dose-response curve, so firing
@@ -93,7 +97,9 @@ spikes = np.sort(spike_time["time"].to_numpy(dtype=float))
 
 def stim_index(d, a, r):
     """flat index into sti_time for duration d, amplitude a, repetition r."""
-    return d * amplitudes * repetitions_per_pulse + a * repetitions_per_pulse + r
+    return (
+        d * amplitudes * repetitions_per_pulse + a * repetitions_per_pulse + r
+    )
 
 
 def count_spikes(t0, t1):
@@ -136,7 +142,9 @@ fontsize = 8  # single font size shared by every text element in the figure
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["font.size"] = fontsize
 radius_points = (2 / 25.4) * 72
-markersize = radius_points  # marker diameter in points (half of the original 2*r)
+markersize = (
+    radius_points  # marker diameter in points (half of the original 2*r)
+)
 markers = ["^", "o", "s"]
 colors = ["#00a20a", "#4dbbd5", "black"]
 labels = ["sti-intensity %d mVpp" % sti_amp[a] for a in amp_sel]

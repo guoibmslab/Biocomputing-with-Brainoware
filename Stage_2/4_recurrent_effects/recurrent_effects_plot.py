@@ -2,7 +2,7 @@
 Plot the 'Evoked response' stem figure from recurrent_effects_plot.xlsx (sheet 'Fig 2d', A1:K2).
 
 Usage:
-    python plot_evoked_response.py [path/to/recurrent_effects_plot.xlsx]
+    python recurrent_effects_plot.py [path/to/recurrent_effects_plot.xlsx]
 
 Requires: openpyxl, matplotlib
 """

@@ -73,15 +73,21 @@ Created from the provided `environment.yml`. Core packages and pinned versions:
 |---------|---------|
 | Python | 3.7 |
 | h5py | 3.7.0 |
+| ipykernel | 6.15.2 |
 | matplotlib | 3.5.3 |
 | numpy | 1.21.5 |
 | pandas | 1.3.5 |
+| pillow | 9.2.0 |
+| pip | 22.3.1 |
 | scikit-learn | 1.0.2 |
 | scipy | 1.7.3 |
 | librosa | 0.8.1 |
+| seaborn | 0.12.2 |
+| openpyxl | 3.0.10 |
+| notebook | 6.5.7 |
 | spykes | - |
-| seaborn | - |
-| openpyxl | - |
+
+[spykes credits: [KordingLab](https://github.com/KordingLab/spykes)]
 
 See [`environment.yml`](environment.yml) for the authoritative dependency list. `seaborn` and `openpyxl` are used by the Stage 2 plotting scripts (`5_spatial_information` raster and the `.xlsx` readers in `4_recurrent_effects`/`5_spatial_information`); install with `pip install seaborn openpyxl` if not already present.
 
@@ -90,7 +96,7 @@ See [`environment.yml`](environment.yml) for the authoritative dependency list. 
 In this protocol, three environments are required to finish all steps:
 - sorting environment
 
-    Environment for Stage 1 (spike sorting with Kilosort + functional connectivity). You can either run the **local** notebook (`kilosort.ipynb`, Kilosort2 — needs MATLAB, a C++ compiler, and a CUDA NVIDIA GPU) or the **Colab** notebook (`Kilosort_colab.ipynb`, Kilosort4 — runs on a Google Colab GPU + High RAM runtime with no local setup). See [`stage_1/README.md`](stage_1/README.md) for step-by-step instructions.
+    Environment for Stage 1 (spike sorting with Kilosort + functional connectivity). You can either run the **local** notebook (`kilosort.ipynb`, Kilosort2 — needs MATLAB, a C++ compiler, and a CUDA NVIDIA GPU) or the **Colab** notebook (`Kilosort_colab.ipynb`, Kilosort4 — runs on a Google Colab GPU + High RAM runtime with no local setup). See [`Stage_1/README.md`](Stage_1/README.md) for step-by-step instructions.
 
 - maxlab environment
 
@@ -103,9 +109,12 @@ In this protocol, three environments are required to finish all steps:
     Conda-based Python virtual environment for data analysis. This can be set up in any device with conda installed (See conda webpage for detailed installation guide: https://docs.conda.io/projects/conda/en/latest/index.html)
 
     After conda is installed:
-    1. Download or clone this repository
-    2. Open the Anaconda prompt and change directory to this repository
-    3. Add conda-forge channel
+    1. Open the Anaconda prompt, download or clone this repository, and change directory to this repository.
+        ```bash
+        git clone https://github.com/guoibmslab/Biocomputing-with-Brainoware.git
+        cd Biocomputing-with-Brainoware
+        ```
+    2. Add conda-forge channel
         ```bash
         conda config --add channels conda-forge
         ```
@@ -114,38 +123,36 @@ In this protocol, three environments are required to finish all steps:
         conda config --env --set subdir osx-64
         # In macOS, Conda no longer builds or keeps Python 3.7 because it’s end-of-life. When you run this line, you force Conda to use the older Intel macOS (osx-64) repository, where Python 3.7 packages still exist, so the installation succeeds even though it’s effectively using a legacy platform.
         ```
-    4. Create a new virtual environment using the provided environment.yml file in the root of the repository 
+    3. Create a new virtual environment using the provided environment.yml file in the root of the repository 
     **[Don't forget to change the directory to this repository!]**
         ```bash
         conda env create --name brainoware_analysis -f environment.yml
         ``` 
-    5. Activate the created analysis environment
+    4. Activate the created analysis environment
         ```bash
         conda activate brainoware_analysis
         ```
-    6. Manually install spykes [credits: [KordingLab](https://github.com/KordingLab/spykes)]
-        ```bash
-        pip install -e spykes-master
-        ```
-    7. Install jupyter notebook, ipykernel, and register the kernel in the jupyter notebook
+    5. Install jupyter notebook, ipykernel, and register the kernel in the jupyter notebook
         ```bash
         pip install notebook
         pip install ipykernel
         python -m ipykernel install --user --name=brainoware_analysis --display-name "Python (brainoware_analysis)"
         ```
-    8. For files with *.py suffix, run
+    6. For files with *.py suffix, run
         ```bash
+        cd {script folder}
         python *.py
         ```
         e.g. Stage_2/1_evoked_response/psth_plot.py
-    9. For files with *.ipynb suffix, run
+    7. For files with *.ipynb suffix, run
         ```bash
+        cd {notebook folder}
         jupyter notebook *.ipynb
         ```
         e.g. Stage_3/1_Information_encoding.ipynb
         
         After entering the notebook page, select brainoware_analysis kernel in the upper right corner of the page (or in the navigation bar -  kernel - change kernel) and run the code one block by one block.
-    10. Execution order of analysis environment
+    8. Execution order of analysis environment
         - Stage_2/1_evoked_response/psth_plot.py
         - Stage_2/2_non_linear_dynamics/nonlinear_dynamics_plot.py
         - Stage_2/3_fading_memory/fading_memory_plot.py

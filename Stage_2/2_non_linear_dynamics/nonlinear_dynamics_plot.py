@@ -31,7 +31,7 @@ from scipy.optimize import curve_fit
 ## ------------------------------------------------------------------ ##
 here = os.path.dirname(os.path.abspath(__file__))
 path = os.path.join(here, "..", "1_evoked_response")
-filename = "psth_exp"
+filename = "fig3a_psth_exp"
 
 spike_time = pd.read_csv(
     os.path.join(path, filename + "_spike.csv"),
@@ -58,7 +58,9 @@ amplitudes = np.size(sti_amp)  # number of amplitudes (7)
 durations = np.size(sti_dura)  # number of durations  (5)
 artifact = 0.002  # stim-artifact half-window to discard (s)
 
-resp_window = 0.5  # total post-stim window used for the dose-response curve (s)
+resp_window = (
+    0.5  # total post-stim window used for the dose-response curve (s)
+)
 
 ## ------------------------------------------------------------------ ##
 ## filter stimulation artifacts within [-2ms, +2ms] of every stim time
@@ -79,7 +81,9 @@ spikes = np.sort(spike_time["time"].to_numpy(dtype=float))
 
 def stim_index(d, a, r):
     """flat index into sti_time for duration d, amplitude a, repetition r."""
-    return d * amplitudes * repetitions_per_pulse + a * repetitions_per_pulse + r
+    return (
+        d * amplitudes * repetitions_per_pulse + a * repetitions_per_pulse + r
+    )
 
 
 def count_spikes(t0, t1):
@@ -138,7 +142,9 @@ fontsize = 8  # single font size shared by every text element in the figure
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["font.size"] = fontsize
 radius_points = (1.876 / 25.4) * 72
-markersize = radius_points  # marker diameter in points (half of the original 2*r)
+markersize = (
+    radius_points  # marker diameter in points (half of the original 2*r)
+)
 labels = ["%dus" % d for d in sti_dura]
 # 100us, 200us, 300us, 400us, 500us  (200us -> grey, 400us -> orange so the
 # two mid curves no longer sit on top of each other)

@@ -10,6 +10,7 @@
 #              only plots the condition of 500us, 500mV stimulation response as an example.
 # -------------------------------------------------------------
 
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -17,7 +18,7 @@ from spykes.plot.neurovis import NeuroVis
 from spykes.plot.popvis import PopVis
 
 ## read spike and stimulation timing files ##
-path = ""
+path = os.path.dirname(os.path.abspath(__file__)) + os.sep
 filename = "fig3a_psth_exp"
 spike_time = pd.read_csv(
     path + filename + "_spike.csv", dtype=object, usecols=[1, 2, 3]
@@ -91,7 +92,7 @@ dura = sti_dura[dura_num]  # 500us
 amp_plot = [4]  # fourth amp, that is 500mV
 
 seq_type = []
-sti_type = str(dura) + "us " + str(sti_amp[amp_plot[0]]) + "mVpp"
+sti_type = str(dura) + "us_" + str(sti_amp[amp_plot[0]]) + "mV"
 print(sti_type)
 sti_type = np.repeat(sti_type, repetitions_per_pulse)
 seq_type.append(sti_type)
@@ -131,21 +132,21 @@ plt.savefig(
     + filename
     + "_"
     + str(seq_type[1])
-    + "us_32_"
+    + "_"
     + str(binsize)
     + "ms"
     + "_raster.svg"
 )
 
-df_raster = pd.DataFrame(all_psth["data"]["500us 500mVpp"])
+df_raster = pd.DataFrame(all_psth["data"]["500us_500mV"])
 df_raster.to_csv(
     path
     + filename
     + "_"
-    + str(dura)
-    + "us_32_"
+    + str(seq_type[1])
+    + "_"
     + str(binsize)
-    + "us"
+    + "ms"
     + "_raster.csv",
     index=False,
 )
@@ -157,9 +158,9 @@ plt.savefig(
     path
     + filename
     + "_"
-    + str(dura)
-    + "us_32_"
+    + str(seq_type[1])
+    + "_"
     + str(binsize)
-    + "us"
+    + "ms"
     + "_psth.svg"
 )
