@@ -12,7 +12,10 @@ import os
 import time
 import maxlab as mx
 from typing import Optional
+import sys
+from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from stimulation_example_official import (
     initialize_system,
     load_config,

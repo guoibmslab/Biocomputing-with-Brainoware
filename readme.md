@@ -11,7 +11,7 @@ This GITHUB code repository provides code and resources related to Brainoware's 
         - kilosort.ipynb — spike sorting (Kilosort2) + functional connectivity, run locally
         - fc_example_data.raw.h5 [**required raw file**; download [here](https://www.dropbox.com/scl/fi/yuw74vcwpnr5bnj7juy1w/fc_example_data.raw.h5?rlkey=0ry7a9fmdssw2b451k6k6l7h1&st=dzrdfhrv&dl=0) and save under this directory]
     - 1_kilosort_functional_connectivity_colab
-        - Kilosort_colab.ipynb — spike sorting (Kilosort4) + functional connectivity, run in Google Colab ([Open In Colab](https://colab.research.google.com/drive/1e2R7HG9jlgmnkg3S3OtvWFQ2vGpSd6Ej?usp=sharing))
+        - Kilosort_colab.ipynb — spike sorting (Kilosort4) + functional connectivity, run in Google Colab ([Open In Colab](https://drive.google.com/file/d/1_r2YQzQBwS07lJpT5ZoM___KwacIVoAE/view?usp=sharing))
 - Stage 2 — Reservoir computing hardware properties
     - 1_evoked_response
         - evoked_response_MEA.py [**maxlab environment**]
