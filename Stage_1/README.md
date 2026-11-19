@@ -102,7 +102,7 @@ ss.Kilosort2Sorter.set_kilosort2_path("D://Kilosort-2.0")
 
 ## 4. Version 2 — Colab (`Kilosort_colab.ipynb`, Kilosort4)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1e2R7HG9jlgmnkg3S3OtvWFQ2vGpSd6Ej?usp=sharing)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://drive.google.com/file/d/1_r2YQzQBwS07lJpT5ZoM___KwacIVoAE/view?usp=sharing)
 
 Click the badge above to open the notebook in Google Colab. To keep your own
 editable copy, use **File → Save a copy in Drive** once it opens.
