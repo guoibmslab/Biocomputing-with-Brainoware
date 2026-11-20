@@ -55,7 +55,7 @@ Used for Stage 1 (spike sorting with Kilosort + functional connectivity). Two in
 
 | Option | Sorter | Key requirements |
 |--------|--------|------------------|
-| **Local** (`kilosort.ipynb`) | Kilosort2 | MATLAB + required toolboxes, a MATLAB-compatible C++ compiler (Windows: Visual Studio Community 2017; Linux/macOS: `g++`), a CUDA-capable NVIDIA GPU (CUDA mex files compiled via `mexGPUall`), Python 3.8+ with `spikeinterface`, `numpy`, `pandas`, `matplotlib`, `networkx`, `numba`, `plotly`, `h5py` |
+| **Local** (`kilosort.ipynb`) | Kilosort2 | MATLAB + required toolboxes, a MATLAB-compatible C++ compiler (Windows: Visual Studio Community 2017; Linux/macOS: `g++`), a CUDA-capable NVIDIA GPU (CUDA mex files compiled via `mexGPUall`), Python 3.8+ with `spikeinterface[full]`, `elephant`, `numpy`, `pandas`, `matplotlib`, `networkx`, `plotly`, `h5py` |
 | **Colab** (`Kilosort_colab.ipynb`) | Kilosort4 | Google Colab GPU runtime with High RAM (>40 GB, e.g. A100/H100); all dependencies installed automatically by the notebook |
 
 ### maxlab environment

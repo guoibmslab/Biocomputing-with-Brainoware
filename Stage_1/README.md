@@ -63,7 +63,7 @@ fc_example_data.raw.h5  (MaxWell MEA Network Scan recording)
 | **C++ compiler** | A MATLAB-compatible C++ compiler. On **Windows**: Visual Studio Community 2017 (MSVC). On **Linux/macOS**: `g++`. |
 | **CUDA GPU code** | The GPU (CUDA) commands must be compiled with the C++ compiler before first use. |
 | **Python** | 3.8+ |
-| Packages | `spikeinterface`, `numpy`, `pandas`, `matplotlib`, `networkx`, `numba`, `plotly`, `h5py` |
+| Packages | `spikeinterface[full]`, `elephant`, `numpy`, `pandas`, `matplotlib`, `networkx`, `plotly`, `h5py`  (pip install "spikeinterface[full]" elephant numpy pandas matplotlib networkx plotly h5py)|
 
 ⚠️Before running, set up the Kilosort2 MATLAB side: install the required 3 MATLAB
 toolboxes and a supported C++ compiler, then compile the GPU (CUDA) commands. Refer to the installation instructions in the
@@ -97,6 +97,27 @@ ss.Kilosort2Sorter.set_kilosort2_path("D://Kilosort-2.0")
 **Adjacency / plot:** `thred_c=0.30` (drop weaker edges), `thred_plot=0.35`
 (only draw edges above this), `color_map='RdYlGn_r'`.
 
+### 3.3 Troubleshooting
+
+**`UnicodeDecodeError: 'utf-8' codec can't decode byte ...` when running Kilosort2 (Windows)**
+
+On Windows set to Chinese or another language with non-English characters, `run_sorter` can fail with an error like:
+
+```
+Error processing .\fc_example_data.raw.h5: 'utf-8' codec can't decode byte 0xb2 in position 5: invalid start byte
+```
+
+Your recording file is fine. Before sorting, SpikeInterface (< 0.105) runs a bash check for a compiled Kilosort2. On Windows, `cmd` cannot run it and prints an error in the system language. SpikeInterface then crashes trying to read that message as UTF-8. Linux, macOS and English Windows are usually not affected.
+
+**Fix:** add this line right after `set_kilosort2_path(...)`:
+
+```python
+# Skip the bash-based "ks2_compiled" check (crashes on non-UTF-8 Windows).
+# This pipeline uses the MATLAB source version of Kilosort2, so the check is not needed.
+ss.Kilosort2Sorter.check_compiled = classmethod(lambda cls: False)
+```
+
+SpikeInterface will then find Kilosort2 through `master_kilosort.m` in the folder you set. On systems that weren't affected, this line changes nothing.
 
 ---
 
